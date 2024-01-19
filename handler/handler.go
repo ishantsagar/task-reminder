@@ -4,7 +4,6 @@ import (
 	"net/http"
 
 	"github.com/go-chi/render"
-	"tskrm.com/httphandler"
 	"tskrm.com/model"
 	"tskrm.com/store"
 )
@@ -26,7 +25,7 @@ func (h *Handler) CreateTask(w http.ResponseWriter, r *http.Request) {
 	if id, err := h.Store.CreateTask(&task); err == nil {
 		task.ID = id
 		render.Status(r, http.StatusOK)
-		render.Render(w, r, httphandler.NewSuccessResponse(http.StatusCreated, task))
+		render.Render(w, r, model.NewSuccessResponse(http.StatusCreated, task))
 	} else {
 		http.Error(w, err.Error(), http.StatusUnprocessableEntity)
 	}

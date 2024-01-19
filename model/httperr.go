@@ -1,9 +1,7 @@
-package httphandler
+package model
 
 import (
 	"net/http"
-
-	"tskrm.com/model"
 )
 
 // Response is a wrapper response structure
@@ -14,7 +12,7 @@ type Response struct {
 
 func NewSuccessResponse(status int, data interface{}) *Response {
 	return &Response{
-		Status: &model.ResponseMeta{
+		Status: &ResponseMeta{
 			AppStatusCode: status,
 			Message:       "reminder successfully added",
 		},
