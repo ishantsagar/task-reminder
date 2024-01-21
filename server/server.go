@@ -23,9 +23,17 @@ func Setup() {
 	r := chi.NewRouter()
 
 	r.Use(middleware.Logger)
-	h := new(handler.Handler)
+	h := handler.Handler{Store: &store.Store{}}
 
-	r.Post("/task", h.CreateTask)
+	r.Post("/task", h.CreateTaskReminder) //Create Task
+
+	r.Put("/task", h.UpdateTaskReminder) //Update Task
+
+	r.Delete("/task/{id}", h.DeleteTaskReminder) //Delete Task
+
+	r.Get("/task/{id}", h.GetTaskReminder) //Get Task By ID
+
+	r.Get("/tasks", h.GetAllTasksReminder) //Get All Tasks
 
 	fmt.Println("server listening on port 3000...")
 	http.ListenAndServe(":3000", r)
